@@ -1,0 +1,227 @@
+Page Object Model :-
+We have a separate web element class for login,home page and one main class 
+
+OrangeHrmLogin.java create the class in objectRepository package
+........................
+package objectRepository;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class OrangeHrmLogin {
+	
+	//driver to use same driver inside methods
+	WebDriver driver;
+	
+	public OrangeHrmLogin(WebDriver driver) {
+		this.driver=driver;
+	}
+	
+	private By oHRMLogo = By.xpath("//div[@class='orangehrm-login-branding']/img[contains(@src,'/web/images/ohrm_branding.png')]");
+	private By username = By.xpath("//input[@name='username']");
+	private By password = By.xpath("//input[@name='password']");
+	private By loginBtn = By.xpath("//button[@type='submit']");
+
+
+	//getter method for Orange HRM login page Logo
+	public WebElement getoHRMLogo() {
+	return driver.findElement(oHRMLogo);
+	}
+	//getter method for LoginPanel element
+	
+	//getter method for username
+	public WebElement getUsername() {
+
+	return driver.findElement(username);
+	}
+	//getter method for password
+	public WebElement getPassword() {
+	return driver.findElement(password);
+	}
+	//getter method for btnlogin
+	public WebElement getBtnLogin() {
+	return driver.findElement(loginBtn);
+	}
+
+}
+
+
+Crete another class OrangeHrmHomePage.java create the class in objectRepository package
+
+
+package objectRepository;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class OrangeHrmHomePage {
+	WebDriver driver;
+	
+	//Define class level driver to use same driver inside methods
+	public OrangeHrmHomePage(WebDriver driver) {
+		this.driver=driver;
+	}
+
+
+
+	//define page object/elements as private
+	private By Dashboard =By.xpath("//h6[.='Dashboard']");
+	
+	private By logouticon = By.xpath("//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']");
+	
+	private By logout = By.xpath("//a[text()='Logout']");
+	
+	//getter method for Orange HRM Home page Logo
+	public WebElement getHomeDashboard() {
+		return driver.findElement(Dashboard);
+	}
+	//getter method for logged in user element
+	public WebElement getLoggedOutIcon() {
+		return driver.findElement(logouticon);
+	}
+	//getter method for logout
+	public WebElement getLogout()
+	{
+		return driver.findElement(logout);
+	}
+	
+}
+.......................................................
+
+finally we create the main class and by creating the object we use the above 2 classes
+
+create the OHRMLoginLogoutTest.java in OrangeHRMPage package
+
+ 
+package OrangeHRMPage;
+import java.time.Duration;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import objectRepository.OrangeHrmHomePage;
+import objectRepository.OrangeHrmLogin;
+
+public class OHRMLoginLogoutTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		//passed driver as an argument in OrangeHRMLoginPage constructor
+		OrangeHrmHomePage hp =new OrangeHrmHomePage(driver);
+		OrangeHrmLogin lp =new OrangeHrmLogin(driver);
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		
+		Thread.sleep(2000);
+		boolean isLoginLogo =lp.getoHRMLogo().isDisplayed();
+		if(isLoginLogo==true) {
+		lp.getUsername().sendKeys("Admin");
+		lp.getPassword().sendKeys("admin123");
+		lp.getBtnLogin().click();
+		
+		boolean ishomepeage=hp.getHomeDashboard().isDisplayed();
+		if(ishomepeage==true) {
+		System.out.println(ishomepeage);
+		hp.getLoggedOutIcon().click();
+		hp.getLogout().click();
+		System.out.println("Succesfully logged out");
+		
+		}
+		else {
+			System.out.println("The home page is not displaying");
+		}
+		}
+		else {
+			System.out.println("Login page it self not displayed");
+		}
+		driver.quit();
+		
+	}
+
+}
+....................................................................................
+
+
+The same above test case we can convert it into Testng before that we need to follow few steps to run in tesng below are the installation process
+
+1. Goto Maven repository and add the dependency for testng 
+2.goto EclipseMarket place present in the Help main menu
+3. Search testng for eclipse 
+4. install and restart the eclipse 
+
+
+
+package OrangeHRMPage;
+import java.time.Duration;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import objectRepository.OrangeHrmLogin;
+import objectRepository.OrangeHrmHomePage;
+
+
+public class ORhLgoinLogOutTestNg {
+	
+WebDriver driver;
+OrangeHrmHomePage hp;
+OrangeHrmLogin lp;
+
+@BeforeClass
+
+public void launchOrhm() throws InterruptedException{
+	
+	driver = new ChromeDriver();
+	hp =new OrangeHrmHomePage(driver);
+	lp=	 new OrangeHrmLogin(driver);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	driver.manage().window().maximize();
+	driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+	
+}
+
+	@Test
+	public void loginLogoutTest() {
+		System.out.println("@test class of the line");
+		//boolean isLoginLogo =lp.getoHRMLogo().isDisplayed();
+		//Assert.assertTrue(isLoginLogo, "Step fail:Not on login page");
+		System.out.println("On login page ");
+		lp.getUsername().sendKeys("Admin");
+		lp.getPassword().sendKeys("admin123");
+		lp.getBtnLogin().click();
+		
+	boolean isHomeDashBoard	=hp.getHomeDashboard().isDisplayed();
+	Assert.assertTrue(isHomeDashBoard,"Step fail :not on login page");
+	System.out.println("user is on home page");
+	hp.getLoggedOutIcon().click();
+	hp.getLogout().click();
+	System.out.println("Succesfully logged out");
+	
+	
+	}
+	
+	@AfterClass
+	public void closeBrowser()
+	{
+		driver.quit();
+	}
+	
+
+}
+
+..............................................................................
+
+
+
+
+
+
+
+

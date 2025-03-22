@@ -1,0 +1,90 @@
+1.Test case:-Login application
+2.Testcase:-Reg page
+ what to test
+------------------------------------------------------------------
+test step's
+how to test 
+step's
+1.user enter the valid url
+2.user name 
+3.passwword
+4.click onsign button
+5.user should see the home page
+
+-----------------------------------------------login (regression)-----------------
+selenium/java---cypress -----------
+browser.launch("");
+driver.findelemt(name).sendvalue("quadri");
+driver.findelemt(password).s("quadri");
+driver.findelemt(signbutton).click();
+driver.findelemt(homepage).textEqual("facebook");
+---------------------------------------------------------------
+
+Bug_id_007
+
+Des:-while entering the login id user found text box is disabled 
+
+step's to produce :
+1.user enter "url"
+2.he tries to click on text 
+
+Actual:-
+user is unable to enter the value into the text box
+
+Expected:
+user should able to enter the value into the text box
+
+
+
+priority:-p1
+p2
+p3
+p4
+.
+Environment :-int,stg
+ScreenShot,video
+......................
+
+
+
+
+
+
+Water fall .........................................(
+
+4-5 month's
+1.Requirement
+2.Design
+3.entire application Facebook application
+4.Testing (entire application)
+5.Release(production)
+
+
+Agile meth.................Daily standup meeting(Daily Update)------Refinement(1,2,3,5,8) ------Retro meeting(main casuse,Shift, )--------sprint review (Demo of the application)
+Sprint's (15 day's)(30 sep to 14th oct)
+
+Sprint planning
+1.photo model 
+2.check 
+3.can we finish ? 1 sprint 
+4.Photo frame 
+5.photo frame testing
+6.release---------- 
+------------------------------------------
+from 14th oct to 28th oct (sprint 2nd)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

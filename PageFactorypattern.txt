@@ -1,0 +1,151 @@
+PageFactory pattern 
+.......................
+This is another way you can write your object in page factory 
+
+We used to initialize elements of page class using @findElement  
+
+Example
+we need to initialize it we use .initElements
+
+pageFactory.initElements(driver, this)
+
+@FindBy(id="username")
+webElement username
+...............................................................
+same page object class im copying and pasting in different package and modifying the class name
+
+package PageFActoryobjectRepository;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class OrangeHrmLogin {
+	
+	//driver to use same driver inside methods
+	WebDriver driver;
+	
+	public OrangeHrmLogin(WebDriver driver) {
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	//private By oHRMLogo = By.xpath("//div[@class='orangehrm-login-branding']/img[contains(@src,'/web/images/ohrm_branding.png')]");
+	@FindBy(xpath="//div[@class='orangehrm-login-branding']/img[contains(@src,'/web/images/ohrm_branding.png')]")
+ private WebElement oHRMLogo;
+ 
+	//private By username = By.xpath("//input[@name='username']");
+	
+	@FindBy(xpath="//input[@name='username']")
+	private WebElement userName;
+	
+	//private By password = By.xpath("//input[@name='password']");
+	@FindBy(xpath="//input[@name='password']")
+	private WebElement password;
+	
+	//private By loginBtn = By.xpath("//button[@type='submit']");
+	
+	@FindBy(xpath="//button[@type='submit']")
+	private WebElement loginBtn;
+	
+	/*Without try catch the code look's like below
+	
+	public WebElement getoHRMLogo() {
+	return oHRMLogo;
+		}*/
+	
+	
+	public WebElement getoHRMLogo() {
+		try {
+	return oHRMLogo;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//getter method for username
+	public WebElement getUsername() {
+
+		try {		
+			return userName;
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+	
+	//getter method for password
+	public WebElement getPassword() {
+		
+		try {
+			return password;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
+	
+	//getter method for btnlogin
+	public WebElement getBtnLogin() {
+		try {
+			return loginBtn;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	}
+
+..............................................................................
+similarly create the pageFactory objects for the homepage 
+
+and the main class will be same just we need to import properly from the package
+
+package OrangeHRMPage;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import PageFActoryobjectRepository.OrangeHrmLogin;
+
+
+public class PaceFactoryClassOHRMLogin {
+
+	public static void main(String[] args) throws InterruptedException {
+	
+//Note there wont be any change in the test case  just change the import statement
+//of pageobject class **Import the correct package****
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		//passed driver as an argument in OrangeHRMLoginPage constructor
+		//OrangeHrmHomePage hp =new OrangeHrmHomePage(driver);
+		OrangeHrmLogin lp =new OrangeHrmLogin(driver);
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		
+		Thread.sleep(2000);
+		boolean isLoginLogo =lp.getoHRMLogo().isDisplayed();
+		if(isLoginLogo==true) {
+		lp.getUsername().sendKeys("Admin");
+		lp.getPassword().sendKeys("admin123");
+		lp.getBtnLogin().click();	
+		driver.quit();
+		
+	}
+	}
+}
+ 
+
+
+
+
+

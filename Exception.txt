@@ -1,0 +1,23 @@
+
+1.ElementClickInterceptedException 
+Element click command could not be properly executed 
+2.ElementNotInteractableException 
+ web element exists in the DOM , but we we hit the element 
+3.ElementNotSelectableException
+Present in the DOM but unable to interact 
+4.ElementNotVisibleException 
+if  element is not visible very commonly face this exception
+5.NoSuchFrameException 
+6.NoSuchWindowException
+7.NotFoundException :-Not present in the DOM
+8.unhandledAlertException
+alert is present but driver unable to handle
+9.unreachableBrowserException
+if an issue while communicating with the browser
+10. stale Element exception 
+...............................................................
+Few java 
+1.NoSuchSessionException 
+ after driver.quit() we perform some action 
+2.ScriptTimeOutException
+Async script does not execute

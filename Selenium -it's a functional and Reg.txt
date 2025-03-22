@@ -1,0 +1,381 @@
+Selenium :-it's a functional and Regression testing tool its used to automate the web application
+
+we have 4 different component's
+1.Selenium IDE(it support's only Firefox browser)
+2.Selenium RC
+3.Selenium webdriver:-it's an API(application Program Interface)which will automate the test cases on web browser
+4.Selenium grid :-Parallel testing 
+
+Selenium Advantage's
+1.open source (free)
+2.Multiple Language(Python,Java,C#)
+3.Multiple Browser
+4.Cross platform(Window's,Linux,Mac os)
+5.3rd party tool's 
+
+Disadvantage's
+1.We can't automate the windows application 
+2.We can't automate the captcha
+3.Open source we don't have dedicated support 
+4.Reporting tool's:-External reporting tool's
+5.Don't support the Image based testing. 
+
+
+Automation script 
+1.Launch the browser
+2.Enter url
+3.User enter's User name 
+4.User enter's the password
+5.Click on Login Button 
+6.Home will be displayed (please enter valid cred)
+
+31st Jan 2025
+
+
+1.its a webdriver which provides the capabilities t interact with any web browser 
+
+Chrome -Chromedriver.exe
+Firefox-geckodriver.exe
+Edge-msgdriver.exe
+
+system.setProperty("webdrdiver.chrome.driver","path of chromedriver.exe");
+ChromeDriver driver = new chromeDriver();
+
+system.setProperty("webdrdiver.gecko.driver","path of geckodriver.exe");
+FirefoxDriver driver = new FirefoxDriver();
+
+
+Webdriver interface its the parent of all the browser
+
+
+
+...............................................................
+
+Webdriver driver;
+
+system.setProperty("webdrdiver.chrome.driver","path of chromedriver.exe");
+driver = new chromeDriver();
+
+system.setProperty("webdrdiver.gecko.driver","path of geckodriver.exe");
+driver = new FirefoxDriver();
+
+
+
+Application Age
+ Enter male Age:...50 ...
+
+Enter male Age:....51......
+
+                   Click 
+
+
+Eclipse
+Selenium library
+chromDriver.exe
+
+2.Selenium Architecture
+
+3.driver.get("https://www.google.com");
+This method launches a web application just we need to provide the url
+
+String URLADDRESS =driver.get("https://www.google.com");
+S.o.p(URLADDRESS)
+
+
+String url="https://Facebook.com/login";
+driver.get(url)
+String pageSource=driver.getPageSource();
+driver.close();-current tab
+driver.quit();-close entire browser
+
+
+
+.......................................................................
+General Structure of HTML
+<html>
+    <head>
+	<title>login</title>
+</head>
+<body>
+<h1>This is heading</h1>
+</body>
+</html>
+..............
+<input type="text" class="inputtext _55r1 _6luy" name="email" id="email" data-testid="royal-email" placeholder="Email address or phone number" autofocus="1" aria-label="Email address or phone number" fdprocessedid="arkez">
+
+
+input.sendvalue("krishna")
+
+
+/html/body/div[1]/div[1]/div[1]/div/div/div/div[1]/h2
+
+Relative:-
+_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy
+_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy
+_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy
+
+
+
+
+
+
+
+1.tag name
+2.class
+3.id
+4.name
+5.link 
+6.xpath---
+absolute(/):-/html/body/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[1]/input
+
+relative:-//input[@id="email"]
+
+
+7.css
+8.Partial link text
+
+.......................
+Maven :-build management tool
+common project structure
+1.Javamain
+2.radio ,text 
+3.test case
+.................
+<title id ="pageTitle" >Facebook – log in or sign up</title>
+
+DOM---Top down
+Try the send the value for first element but we need 3rd element 
+
+
+
+FindElement:-Return single value return type will be WebElement 
+
+FindElelments:- Return the list of WebElements in the DOM
+
+
+<input type="text" class="inputtext _55r1 _6luy" name="email" id="email" data-testid="royal-email" placeholder="Email address or phone number" autofocus="1" aria-label="Email address or phone number" fdprocessedid="oxhdog">
+
+
+List<WEbElement> list = driver.findElements(By.id(""));
+
+
+<button value="1" class="_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy" name="login" data-testid="royal-login-button" type="submit" id="u_0_5_LP" fdprocessedid="8t87do">Log in</button>
+
+<button value="1" class="_42ft _4jy0 _52e0 _4jy6 _4jy1 selected _51sy" id="loginbutton" name="login" tabindex="0" type="submit" fdprocessedid="80zrys">Log in</button>
+
+
+xpath
+//tagname[@id="valueofid"];
+//button[@name='login']
+
+
+
+//div[contains[text(),'The email address']
+
+<div id= "email" >The email address or mobile number you entered isn't connected to an account. </div>
+
+
+<a role="button" clThe email address or mobile number you entered isn't connected to an account. 
+ass="_42ft _4jy0 _6lti _4jy6 _4jy2 selected _51sy" href="/r.php?entry_point=login" ajaxify="" id="u_0_0_Va" data-testid="open-registration-form-button" waprocessedanchor="true">Create new account</a>
+
+//a[text(),'Create new account']
+
+.....................................................
+Xpath options
+1.or:minimum one attribute value should be correct 
+
+<input name="textUsername" id="textUser" type="text">
+
+//input[@id="textUser" or name="textUsername"]
+
+2.And :-Both attribute value should be correct
+
+//input[@id="textUser" and name="textUsername"]
+
+3.Contains():used whose attribute value is dynamic else text is long in length
+
+<input name="textUsername" id="textUser456"
+
+//input[contains(@id,'textUser456')]
+
+//div[contains(text(),'The email address or mobile')]
+
+
+4.starts_with():-
+its used text that are very long in length 
+
+//div[starts-with(text(),'The email address or mobile')]
+
+
+5.text:
+
+//div[text(),"The email address or mobile number you entered isn't connected to an account."] 
+
+//div[contains(text(),"address or mobile number you entered isn't"]
+
+
+6.normalize space()-it works similar as text method but if there is white space present in your text
+
+//tagname[normalize-space(),"your text"]
+
+//div[normalize-space(),"The email address or mobile number you entered isn't connected to an account."]
+
+//div[contains(normalize-space(),"The email address")]
+
+6.chained xpath :-it used to combine two or more   xpath to make a unique
+//form[@id="reg"]//input[@name="lsd"]
+
+
+
+.......................................................................
+
+
+Xpath Axes :-
+
+Types
+1 self :- highlights the current node 
+syntax:
+//tagname[@attribute="value"]/self::tagname 
+//label[.="Male"]/self::label
+
+2 parent: selects the parent node of the current node (one element)
+
+//tagname[@attribute="value"]/parent::tagname[attribute]
+
+//input[@id="sex"]/parent::label[.="Male"]
+
+3 child:-it selects the child of the current node (one more) 
+
+//label[.="Male"]/child::input[@id="sex"]
+
+4 Ancestor:-selects any parents ,grand parent ,great grand parent etc ....
+//tagname[@attribute="value"]/ancestor::tagname[attribute]
+
+//input[@id="sex"]/ancestor::div[@class="mvm _5wa2 _5dbb"]/div[.="Gender"]
+
+5 Descendent
+6 following
+7 following -sibling
+8 preceding
+9 preceding- sibling 
+
+
+from grandparent to child to child
+//span[@class="_5k_3"]/child::span[@class="_5k_2 _5dba"]/child::label[.="Female"]
+  grand parent -------3 children---------------------1-----female
+
+
+
+
+1.Launch OHRm website  and verify it launched successfully.
+2.Enter valid username
+3.enter invalid password
+4.clcik on login
+5.Verify whether login is unsuccessful
+6.Verify the invalid message
+7.Click on forgot pswd link
+8.verify you landed on forgot password page 
+9.Enter the user id and click on reset passoword
+10.request message
+................................................................................................................
+
+PageFactory pattern -This is another way you can write your object in page obeject factory 
+
+We can be used to initialize elements of page class using @findElement  
+
+
+
+@FindBy(id="username")
+webElement username 
+
+After writing all these @FindBy annotation we need to initialize it
+
+pageFactory.initElements(driver, this)
+
+
+/...........................
+
+try{
+5/1=5
+
+}Catch(Exception e){
+
+e.MATHeXECTION
+}
+fINALLY{
+S..P("THIS IS FINAALY BLOCK");
+
+}
+........................................................
+
+1.ElementClickInterceptedException 
+
+Element click command could not be properly executed 
+
+2.ElementNotInteractableException 
+ web element exists in the DOM , but we we hit the element 
+
+3.ElementNotSelectableException
+
+Present in the DOM but unable to interact 
+
+4.ElementNotVisibleException 
+if  element is not visible very commonly face this exception
+
+5.NoSuchFrameException 
+
+6.NoSuchWindowException
+7.NotFoundException :-Not present in the DOM
+8.unhandledAlertException
+alert is present but driver unable to handle
+9.unreachableBrowserException
+if an issue while communicating with the browser
+10. stale Element exception 
+...............................................................
+Few java 
+1.NoSuchSessionException 
+ after driver.quit() we perform some action 
+2.ScriptTimeOutException
+Async script does not execute
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
